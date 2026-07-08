@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen - Research & Projects</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .status-badge {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .status-complete {
+            background-color: #e3f7e8;
+            color: #2a8a45;
+        }
+
+        .status-in-use {
+            background-color: #e3edfa;
+            color: #2a5f9e;
+        }
+
+        .status-incomplete {
+            background-color: #fbf0dd;
+            color: #b5791a;
+        }
+
+        .research-section {
+            margin-bottom: 20px;
+        }
+
+        .research-section h4 {
+            color: #667eea;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .research-section p {
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .research-section.challenges {
+            background-color: #fffaf3;
+            padding: 18px 20px;
+            border-radius: 6px;
+            border-left: 3px solid #e0a94c;
+        }
+
+        .research-section.challenges h4 {
+            color: #b5791a;
+        }
+
+        .research-section.learned {
+            background-color: #f4f7ff;
+            padding: 18px 20px;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+        }
+
+        .intro-note {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            color: #555;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Alex Chen</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="media-portfolio.html">Media</a>
+                <a href="research-experiences.html" class="active">Research & Projects</a>
+                <a href="journal.html">Journal</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Research & Projects</h1>
+            <p>Write-ups of research experiences and self-directed projects — including the ones that didn't go as planned.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <a href="index.html" class="back-button">← Back to main portfolio</a>
+
+            <div class="intro-note">
+                Not every project here reached a finished result, and I've tried to describe each one honestly rather than polish over the parts that didn't work. I've found that what I learned from a stalled project is often just as real as what I learned from a finished one — so both are included below.
+            </div>
+
+            <div id="research-loading" class="loading-message">Loading research write-ups…</div>
+            <div id="research-list"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Alex Chen. Designed and built by me. <a href="https://github.com/yourusername/portfolio">View source</a></p>
+    </footer>
+
+    <script>
+        fetch('data/portfolio.json')
+            .then(response => response.json())
+            .then(data => {
+                renderResearch(data.researchProjects);
+                document.getElementById('research-loading').style.display = 'none';
+            })
+            .catch(err => {
+                document.getElementById('research-loading').textContent =
+                    'Could not load research data. Make sure data/portfolio.json exists and this page is served over http (not opened directly as a file).';
+                console.error('Error loading portfolio.json:', err);
+            });
+
+        function statusClass(status) {
+            const lower = status.toLowerCase();
+            if (lower.includes('incomplete')) return 'status-incomplete';
+            if (lower.includes('in use') || lower.includes('active')) return 'status-in-use';
+            return 'status-complete';
+        }
+
+        function renderResearch(projects) {
+            const container = document.getElementById('research-list');
+
+            projects.forEach(project => {
+                const skillsHTML = project.skills.map(skill => `<span class="tag">${skill}</span>`).join('');
+
+                const card = document.createElement('div');
+                card.className = 'card';
+                card.innerHTML = `
+                    <span class="status-badge ${statusClass(project.status)}">${project.status}</span>
+                    <h3>${project.title}</h3>
+                    <p class="date">${project.date}</p>
+
+                    <div class="research-section">
+                        <h4>Context</h4>
+                        <p>${project.context}</p>
+                    </div>
+
+                    <div class="research-section">
+                        <h4>Approach</h4>
+                        <p>${project.approach}</p>
+                    </div>
+
+                    <div class="research-section challenges">
+                        <h4>Challenges & What Went Wrong</h4>
+                        <p>${project.challenges}</p>
+                    </div>
+
+                    <div class="research-section learned">
+                        <h4>What I Learned</h4>
+                        <p>${project.learned}</p>
+                    </div>
+
+                    <div class="tags">${skillsHTML}</div>
+                `;
+                container.appendChild(card);
+            });
+        }
+    </script>
+</body>
+</html>

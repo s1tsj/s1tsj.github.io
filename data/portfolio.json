@@ -1,0 +1,166 @@
+{
+  "profile": {
+    "name": "Alex Chen",
+    "title": "Biology Graduate | Data-Driven Science Communicator",
+    "bio": "I'm passionate about exploring the intersection of experimental science and computational analysis. This portfolio showcases my journey through research, the skills I've developed, and where my interests are leading me.",
+    "email": "alex@example.com",
+    "socials": {
+      "linkedin": "https://linkedin.com/in/yourusername",
+      "twitter": "https://twitter.com/yourusername",
+      "github": "https://github.com/yourusername"
+    }
+  },
+
+  "mediaGallery": [
+    {
+      "project": "Microbial Growth Kinetics Study",
+      "date": "Jan – Apr 2023",
+      "items": [
+        {
+          "type": "photo",
+          "src": "images/growth-lab-setup.jpg",
+          "caption": "Lab Setup",
+          "takeaway": "Temperature-controlled incubators running parallel cultures. This taught me how much of good science is really just good logistics — labeling, timing, and consistency."
+        },
+        {
+          "type": "photo",
+          "src": "images/growth-plates-day7.jpg",
+          "caption": "Culture Plates — Day 7",
+          "takeaway": "Visible colony differences across temperature conditions. First time I really understood how sensitive biological systems are to small environmental changes."
+        },
+        {
+          "type": "photo",
+          "src": "images/growth-curve-chart.jpg",
+          "caption": "Growth Curve Analysis",
+          "takeaway": "Plotting OD600 readings over time. This is where I started teaching myself Python for data visualization instead of relying on Excel alone."
+        },
+        {
+          "type": "photo",
+          "src": "images/growth-notebook.jpg",
+          "caption": "Lab Notebook",
+          "takeaway": "Daily handwritten logs. Learned the hard way why timestamping every observation matters when you're trying to reconstruct what happened three weeks later."
+        }
+      ]
+    },
+    {
+      "project": "Lab Automation Project",
+      "date": "May – Aug 2023",
+      "items": [
+        {
+          "type": "photo",
+          "src": "images/automation-script.jpg",
+          "caption": "Automation Script Interface",
+          "takeaway": "My first real Python tool built for someone other than myself. Learned that writing code people other than you will use is a completely different skill than writing code for a class assignment."
+        },
+        {
+          "type": "photo",
+          "src": "images/automation-before-after.jpg",
+          "caption": "Before / After Data Cleanup",
+          "takeaway": "Raw plate reader exports vs. standardized output. This project taught me that most 'data analysis' time is actually just data cleaning time."
+        },
+        {
+          "type": "video",
+          "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "caption": "System Demo (2 min)",
+          "takeaway": "Walkthrough of the automated report generation. Recording this forced me to explain my own code clearly, which honestly improved the code itself."
+        },
+        {
+          "type": "photo",
+          "src": "images/automation-report.jpg",
+          "caption": "Generated Weekly Report",
+          "takeaway": "Used by 3 lab members. Small tool, but seeing someone else rely on something I built was a genuine turning point in how I saw my own skills."
+        }
+      ]
+    },
+    {
+      "project": "Science Communication Workshops",
+      "date": "Sept 2023 – Present",
+      "items": [
+        {
+          "type": "photo",
+          "src": "images/workshop-presenting.jpg",
+          "caption": "Workshop Setup",
+          "takeaway": "Presenting antibiotic resistance concepts to high schoolers. Learned to strip jargon out of my explanations without dumbing down the actual science."
+        },
+        {
+          "type": "photo",
+          "src": "images/workshop-handson.jpg",
+          "caption": "Hands-On Microscopy",
+          "takeaway": "Students identifying bacterial morphology under microscopes. Watching confusion turn into understanding in real time is what pointed me toward science communication as a career interest."
+        },
+        {
+          "type": "video",
+          "src": "https://www.youtube.com/embed/dQw4w9WgXcQ",
+          "caption": "Workshop Excerpt (3 min)",
+          "takeaway": "Recorded explanation of resistance mechanisms. My first time seeing myself teach on camera — humbling, but useful for improving pacing and clarity."
+        },
+        {
+          "type": "photo",
+          "src": "images/workshop-group.jpg",
+          "caption": "Workshop Cohort",
+          "takeaway": "Five sessions, five different groups. Each one needed a slightly different approach, which taught me to read a room rather than run a fixed script."
+        }
+      ]
+    }
+  ],
+
+  "researchProjects": [
+    {
+      "title": "Microbial Growth Kinetics Under Temperature Stress",
+      "date": "January – April 2023",
+      "status": "Completed",
+      "context": "A 12-week independent research project investigating how incubation temperature affects bacterial growth rate, run as part of a university research module. The goal was to characterize growth curves across five temperature conditions using optical density readings.",
+      "approach": "Designed a sampling schedule across 50+ culture samples, took OD600 readings every 2 hours during the exponential phase, and used Python (pandas, matplotlib) to fit growth curves and compare rate constants across conditions.",
+      "challenges": "My first two weeks of data were unusable — I hadn't controlled for incubator door-opening frequency, which introduced temperature fluctuations that swamped the actual signal. I had to redesign the sampling protocol and restart data collection, which cost me nearly a month.",
+      "learned": "This was less a lesson in microbiology and more a lesson in experimental control: the variable you don't think to control is usually the one that ruins your data. It also taught me to build in a short pilot run before committing to a full data collection schedule, rather than assuming my first design would work.",
+      "skills": ["Experimental Design", "Python (pandas, matplotlib)", "Statistical Analysis", "Lab Technique"]
+    },
+    {
+      "title": "Lab Data Automation Tool",
+      "date": "May – August 2023",
+      "status": "Completed, in active use",
+      "context": "Our lab was manually copying plate reader output into spreadsheets every week — a slow, error-prone process. I proposed and built a Python script to automate parsing, cleaning, and report generation.",
+      "approach": "Built a command-line Python tool using pandas to parse raw plate reader exports, flag anomalous readings automatically, and generate a formatted weekly PDF summary for the lab.",
+      "challenges": "The first version broke constantly because I'd only tested it against my own data exports, and other lab members' plate reader software produced slightly different file formats. I underestimated how much 'real world' input data varies compared to the clean examples I built and tested with.",
+      "learned": "Robust code has to handle inputs you didn't anticipate, not just the ones you tested. I also learned the value of asking future users what their actual files look like before writing a single line of code, rather than after.",
+      "skills": ["Python", "Automation", "pandas", "Requirements Gathering"]
+    },
+    {
+      "title": "RNA-seq Analysis Exploration",
+      "date": "October – December 2023",
+      "status": "Incomplete — did not reach a working pipeline",
+      "context": "A self-directed attempt to learn RNA-seq differential expression analysis using R and Bioconductor, motivated by wanting to understand genomics workflows outside of coursework.",
+      "approach": "Worked through public tutorials using DESeq2 on a sample dataset, aiming to eventually run the same pipeline on a small dataset from a professor's lab.",
+      "challenges": "I underestimated how much background I was missing in R's data structures and Bioconductor's object conventions. I got stuck for several weeks on formatting my count matrix correctly and never got a full pipeline running end-to-end on real data before the term ended and my time ran out.",
+      "learned": "Even though I didn't finish, I came away with a real understanding of what a differential expression workflow actually involves — normalization, dispersion estimation, multiple testing correction — which I couldn't have gotten from just reading about it. It also taught me to scope self-directed projects more realistically, and that an honest 'I got this far and here's exactly where I got stuck' is more useful to show than pretending a project went smoothly.",
+      "skills": ["R (in progress)", "Bioconductor (in progress)", "Genomics Concepts", "Self-Directed Learning"]
+    }
+  ],
+
+  "journalEntries": [
+    {
+      "date": "March 2024",
+      "title": "Why I keep coming back to science communication",
+      "tags": ["career", "reflection"],
+      "content": "I've noticed a pattern: whenever I have free time, I gravitate toward explaining things rather than just doing them. After finishing the growth kinetics project, I wanted to write it up for people who weren't in the field, not just file it away as a report. That instinct is starting to feel less like a hobby and more like a direction."
+    },
+    {
+      "date": "January 2024",
+      "title": "Reading outside my field on purpose",
+      "tags": ["reading", "interests"],
+      "content": "Started deliberately reading science journalism instead of only papers in my subfield — partly to see how good writers translate dense results into something a general reader can follow. It's changed how I write my own lab reports, for the better I think."
+    },
+    {
+      "date": "November 2023",
+      "title": "What the failed RNA-seq attempt actually gave me",
+      "tags": ["research", "reflection"],
+      "content": "I spent two months on a project that never fully worked, and my first instinct was to be embarrassed about it. But writing up what I learned for my research portfolio made me realize the getting-stuck part is where most of the actual learning happened. I'm trying to be less precious about only showcasing finished things."
+    },
+    {
+      "date": "September 2023",
+      "title": "Teaching microbiology to 16-year-olds",
+      "tags": ["teaching", "interests"],
+      "content": "Ran my first workshop this week. I over-prepared slides and under-prepared for questions — the students asked things I hadn't considered, which was more useful than anything in my planning. I want to do more of this."
+    }
+  ]
+}

@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen - Media Portfolio</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        /* ===== Carousel-specific styles ===== */
+        .carousel-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .carousel-track {
+            position: relative;
+            width: 100%;
+            height: 420px;
+            background: #f0f0f0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.6s ease-in-out;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .slide.active {
+            opacity: 1;
+            z-index: 2;
+        }
+
+        .slide-media {
+            flex: 1;
+            background: linear-gradient(135deg, #e8e8e8 0%, #f5f5f5 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 14px;
+            position: relative;
+        }
+
+        .slide-media img,
+        .slide-media iframe {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border: none;
+        }
+
+        .slide-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background-color: #667eea;
+            color: white;
+            padding: 5px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .slide-caption {
+            background: white;
+            padding: 20px 25px;
+        }
+
+        .slide-caption .project-tag {
+            font-size: 12px;
+            color: #667eea;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 5px;
+        }
+
+        .slide-caption h3 {
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .slide-caption p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        /* Controls */
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .carousel-btn {
+            background: white;
+            border: 2px solid #667eea;
+            color: #667eea;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        }
+
+        .carousel-btn:hover {
+            background-color: #667eea;
+            color: white;
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: #ccc;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dot.active {
+            background-color: #667eea;
+        }
+
+        .pause-note {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 15px;
+        }
+
+        /* Full gallery grid below carousel */
+        .full-gallery-heading {
+            margin-top: 80px;
+        }
+
+        .project-group {
+            margin-bottom: 50px;
+        }
+
+        .project-group h3 {
+            color: #667eea;
+            font-size: 22px;
+            margin-bottom: 5px;
+        }
+
+        .project-group .project-date {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 20px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-card {
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .gallery-card-media {
+            height: 160px;
+            background: linear-gradient(135deg, #f0f0f0 0%, #e8e8e8 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 13px;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .gallery-card-info {
+            padding: 15px;
+        }
+
+        .gallery-card-info h4 {
+            color: #667eea;
+            font-size: 14px;
+            margin-bottom: 6px;
+        }
+
+        .gallery-card-info p {
+            font-size: 12px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        @media (max-width: 768px) {
+            .carousel-track {
+                height: 480px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Alex Chen</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="media-portfolio.html" class="active">Media</a>
+                <a href="research-experiences.html">Research & Projects</a>
+                <a href="journal.html">Journal</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Media Portfolio</h1>
+            <p>A running visual log of labs, workshops, and sessions — with the takeaway from each moment, not just the image.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <a href="index.html" class="back-button">← Back to main portfolio</a>
+
+            <!-- Auto-scrolling Carousel -->
+            <div id="carousel-loading" class="loading-message">Loading media…</div>
+            <div class="carousel-wrapper" id="carousel-wrapper" style="display:none;">
+                <div class="carousel-track" id="carousel-track"></div>
+                <div class="carousel-controls">
+                    <button class="carousel-btn" id="prev-btn" aria-label="Previous">‹</button>
+                    <div class="carousel-dots" id="carousel-dots"></div>
+                    <button class="carousel-btn" id="next-btn" aria-label="Next">›</button>
+                </div>
+                <p class="pause-note">Auto-advances every 5 seconds — hover to pause, or use the arrows/dots.</p>
+            </div>
+
+            <!-- Full gallery organized by project, below the carousel -->
+            <div class="full-gallery-heading">
+                <h2>Full Gallery, by Project</h2>
+                <div id="full-gallery"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Alex Chen. Designed and built by me. <a href="https://github.com/yourusername/portfolio">View source</a></p>
+    </footer>
+
+    <script>
+        let currentSlide = 0;
+        let slides = [];
+        let autoAdvanceTimer = null;
+        const ADVANCE_INTERVAL = 5000;
+
+        fetch('data/portfolio.json')
+            .then(response => response.json())
+            .then(data => {
+                // Flatten all media items into one list for the carousel,
+                // keeping track of which project each item belongs to.
+                data.mediaGallery.forEach(project => {
+                    project.items.forEach(item => {
+                        slides.push({ ...item, project: project.project });
+                    });
+                });
+
+                buildCarousel();
+                buildFullGallery(data.mediaGallery);
+
+                document.getElementById('carousel-loading').style.display = 'none';
+                document.getElementById('carousel-wrapper').style.display = 'block';
+            })
+            .catch(err => {
+                document.getElementById('carousel-loading').textContent =
+                    'Could not load media data. Make sure data/portfolio.json exists and this page is served over http (not opened directly as a file).';
+                console.error('Error loading portfolio.json:', err);
+            });
+
+        function buildCarousel() {
+            const track = document.getElementById('carousel-track');
+            const dotsContainer = document.getElementById('carousel-dots');
+
+            slides.forEach((slide, index) => {
+                // Build slide element
+                const slideEl = document.createElement('div');
+                slideEl.className = 'slide' + (index === 0 ? ' active' : '');
+                slideEl.dataset.index = index;
+
+                const mediaHTML = slide.type === 'video'
+                    ? `<div class="slide-media"><span class="slide-badge">VIDEO</span><iframe src="${slide.src}" title="${slide.caption}" allowfullscreen></iframe></div>`
+                    : `<div class="slide-media">${slide.src ? `<img src="${slide.src}" alt="${slide.caption}">` : '[Photo placeholder — add src in portfolio.json]'}</div>`;
+
+                slideEl.innerHTML = `
+                    ${mediaHTML}
+                    <div class="slide-caption">
+                        <div class="project-tag">${slide.project}</div>
+                        <h3>${slide.caption}</h3>
+                        <p>${slide.takeaway}</p>
+                    </div>
+                `;
+                track.appendChild(slideEl);
+
+                // Build dot
+                const dot = document.createElement('div');
+                dot.className = 'dot' + (index === 0 ? ' active' : '');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            document.getElementById('prev-btn').addEventListener('click', () => {
+                goToSlide((currentSlide - 1 + slides.length) % slides.length);
+                resetTimer();
+            });
+            document.getElementById('next-btn').addEventListener('click', () => {
+                goToSlide((currentSlide + 1) % slides.length);
+                resetTimer();
+            });
+
+            const wrapper = document.getElementById('carousel-wrapper');
+            wrapper.addEventListener('mouseenter', () => clearInterval(autoAdvanceTimer));
+            wrapper.addEventListener('mouseleave', () => startTimer());
+
+            startTimer();
+        }
+
+        function goToSlide(index) {
+            const allSlides = document.querySelectorAll('.slide');
+            const allDots = document.querySelectorAll('.dot');
+            allSlides[currentSlide].classList.remove('active');
+            allDots[currentSlide].classList.remove('active');
+            currentSlide = index;
+            allSlides[currentSlide].classList.add('active');
+            allDots[currentSlide].classList.add('active');
+        }
+
+        function startTimer() {
+            autoAdvanceTimer = setInterval(() => {
+                goToSlide((currentSlide + 1) % slides.length);
+            }, ADVANCE_INTERVAL);
+        }
+
+        function resetTimer() {
+            clearInterval(autoAdvanceTimer);
+            startTimer();
+        }
+
+        function buildFullGallery(mediaGallery) {
+            const container = document.getElementById('full-gallery');
+
+            mediaGallery.forEach(project => {
+                const group = document.createElement('div');
+                group.className = 'project-group';
+
+                const itemsHTML = project.items.map(item => {
+                    const mediaHTML = item.type === 'video'
+                        ? `[Video: ${item.caption}]`
+                        : (item.src ? `<img src="${item.src}" alt="${item.caption}" style="width:100%;height:100%;object-fit:cover;">` : `[Photo: ${item.caption}]`);
+
+                    return `
+                        <div class="gallery-card">
+                            <div class="gallery-card-media">${mediaHTML}</div>
+                            <div class="gallery-card-info">
+                                <h4>${item.caption}</h4>
+                                <p>${item.takeaway}</p>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+
+                group.innerHTML = `
+                    <h3>${project.project}</h3>
+                    <p class="project-date">${project.date}</p>
+                    <div class="gallery-grid">${itemsHTML}</div>
+                `;
+                container.appendChild(group);
+            });
+        }
+    </script>
+</body>
+</html>

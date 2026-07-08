@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alex Chen - Journal</title>
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .journal-entry {
+            background: white;
+            padding: 30px 35px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        .journal-entry::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #667eea 0%, #764ba2 100%);
+            border-radius: 4px 0 0 4px;
+        }
+
+        .journal-date {
+            color: #999;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .journal-entry h3 {
+            color: #333;
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .journal-entry p {
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .journal-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .journal-tag {
+            background-color: #f4f0fb;
+            color: #764ba2;
+            padding: 3px 12px;
+            border-radius: 15px;
+            font-size: 11px;
+        }
+
+        .intro-note {
+            background: white;
+            padding: 25px 30px;
+            border-radius: 8px;
+            margin-bottom: 40px;
+            color: #555;
+            line-height: 1.8;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <nav>
+            <a href="index.html" class="logo">Alex Chen</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="media-portfolio.html">Media</a>
+                <a href="research-experiences.html">Research & Projects</a>
+                <a href="journal.html" class="active">Journal</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-hero">
+        <div class="container">
+            <h1>Journal</h1>
+            <p>Shorter, more personal reflections on the interests and questions shaping where I want my career to go.</p>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <a href="index.html" class="back-button">← Back to main portfolio</a>
+
+            <div class="intro-note">
+                This is a more informal space than the research page — fewer polished conclusions, more of the actual thinking as it happens. Entries are in reverse chronological order.
+            </div>
+
+            <div id="journal-loading" class="loading-message">Loading journal entries…</div>
+            <div id="journal-list"></div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 Alex Chen. Designed and built by me. <a href="https://github.com/yourusername/portfolio">View source</a></p>
+    </footer>
+
+    <script>
+        fetch('data/portfolio.json')
+            .then(response => response.json())
+            .then(data => {
+                renderJournal(data.journalEntries);
+                document.getElementById('journal-loading').style.display = 'none';
+            })
+            .catch(err => {
+                document.getElementById('journal-loading').textContent =
+                    'Could not load journal data. Make sure data/portfolio.json exists and this page is served over http (not opened directly as a file).';
+                console.error('Error loading portfolio.json:', err);
+            });
+
+        function renderJournal(entries) {
+            const container = document.getElementById('journal-list');
+
+            entries.forEach(entry => {
+                const tagsHTML = entry.tags.map(tag => `<span class="journal-tag">${tag}</span>`).join('');
+
+                const entryEl = document.createElement('div');
+                entryEl.className = 'journal-entry';
+                entryEl.innerHTML = `
+                    <p class="journal-date">${entry.date}</p>
+                    <h3>${entry.title}</h3>
+                    <p>${entry.content}</p>
+                    <div class="journal-tags">${tagsHTML}</div>
+                `;
+                container.appendChild(entryEl);
+            });
+        }
+    </script>
+</body>
+</html>
